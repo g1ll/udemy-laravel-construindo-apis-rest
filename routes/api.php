@@ -25,13 +25,11 @@ Route::get('test',[Test::class,'test']);
 
 Route::get('/teste',function(Request $request){
 //    dd($request->headers->all());//Mostrando o cabeçalho
-    dd($request->headers->get('Authorization')); //Mostrando uma chave específica do cabeçalho
+//    dd($request->headers->get('Authorization')); //Mostrando uma chave específica do cabeçalho
     $response = new \Illuminate\Http\Response(json_encode(['msg'=>'Minha primeira resposta de api!']));
     $response->header('Content-Type','application/json');//MymeType JSON
     return $response;
 });
 
 //Products Route
-Route::get('/products',function (){
-   return \App\Models\Product::all();
-});
+Route::get('/products',[\App\Http\Controllers\Api\ProductController::class,'index']);
