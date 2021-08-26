@@ -21,6 +21,7 @@ class CreateTableProducts extends Migration
             $table->string('slug');
             $table->timestamps();
         });
+        //create table: $>php artisan migrate
     }
 
     /**
