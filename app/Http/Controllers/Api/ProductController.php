@@ -7,5 +7,20 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
+    /**
+     * @var Product
+     */
+    private $product;
+
+    public function __construct(Product $product)
+    {
+
+        $this->product = $product;
+    }
+
+    public function index()
+    {
+        $products = $this->product->all();
+        return response()->json($products);
+    }
 }
