@@ -9,6 +9,6 @@ class Test extends Controller
 {
     public function test()
     {
-        return response()->json(['test'=>'Hello World!']);
+        return response()->json(['test' => 'Hello World!']);
     }
 }
