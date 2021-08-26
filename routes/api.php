@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\Api\Test;
-
+use \App\Http\Controllers\Api\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,5 +31,6 @@ Route::get('/teste',function(Request $request){
     return $response;
 });
 
+
 //Products Route
-Route::get('/products',[\App\Http\Controllers\Api\ProductController::class,'index']);
+Route::get('/products',[ProductController::class,'index']);
