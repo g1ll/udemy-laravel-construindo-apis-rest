@@ -36,5 +36,6 @@ Route::prefix('products')->group(function(){
     Route::get('/{id}',[ProductController::class,'show']);
     Route::post('/',[ProductController::class,'save']);
     Route::put('/',[ProductController::class,'update']);
+    Route::patch('/',[ProductController::class,'update']);
 });
 
