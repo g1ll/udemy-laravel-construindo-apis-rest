@@ -33,5 +33,5 @@ Route::get('/teste',function(Request $request){
 
 //Products Route
 Route::get('/products',function (){
-   return Product::all();
+   return \App\Models\Product::all();
 });
