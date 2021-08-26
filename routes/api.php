@@ -30,3 +30,8 @@ Route::get('/teste',function(Request $request){
     $response->header('Content-Type','application/json');//MymeType JSON
     return $response;
 });
+
+//Products Route
+Route::get('/products',function (){
+   return Product::all();
+});
