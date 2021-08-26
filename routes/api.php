@@ -24,5 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('test',[Test::class,'test']);
 
 Route::get('/teste',function(){
-    return ['msg'=>'Minha primeira resposta de api!'];
+    $response = new \Illuminate\Http\Response(json_encode(['msg'=>'Minha primeira resposta de api!']));
+    $response->header('Content-Type','application/json');//MymeType JSON
+    return $response;
 });
