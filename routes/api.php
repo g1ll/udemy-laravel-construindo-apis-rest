@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\Api\Test;
 use \App\Http\Controllers\Api\ProductController;
+use \App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,3 +41,4 @@ Route::prefix('products')->group(function(){
     Route::delete('/{id}',[ProductController::class,'delete']);
 });
 
+Route::resource('users',UserController::class);
