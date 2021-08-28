@@ -19,7 +19,8 @@ class ProductResource extends JsonResource
          return  [
              'name'=>$this->name,
              'description'=>$this->description,
-             'price'=>$this->price
+             'price'=>$this->price,
+             'offPrice'=>($this->price>100)?$this->price*.9:null //Evaluates off-price of 10%
          ];
 //        return $this->resource->toArray();
     }
