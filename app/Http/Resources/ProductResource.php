@@ -15,12 +15,12 @@ class ProductResource extends JsonResource
     public function toArray($request)
     {
 //        return parent::toArray($request);
-
+        $offPrice = ($this->price>100)?$this->price*.9:null;
          return  [
              'name'=>$this->name,
              'description'=>$this->description,
              'price'=>$this->price,
-             'offPrice'=>($this->price>100)?$this->price*.9:null //Evaluates off-price of 10%
+             'offPrice'=>floatval(number_format($offPrice,2)) //Evaluates off-price of 10%
          ];
 //        return $this->resource->toArray();
     }
