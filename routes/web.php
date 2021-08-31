@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
+Auth::routes();
+Route::get('/login',function(){return response()->json(['unauthenticated'],401);})->name('login');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
