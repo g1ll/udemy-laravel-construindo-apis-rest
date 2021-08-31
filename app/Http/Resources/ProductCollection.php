@@ -27,9 +27,11 @@ class ProductCollection extends ResourceCollection
         foreach ($this->collection as $product)
             $totalPrice+=$product->price;
 
+        $offPrice = ($totalPrice>100)?$totalPrice *.9:null; // Ten percent of off-price;
+
         return [
             'totalPrice'=>$totalPrice,
-            'offPrice'=>($totalPrice>100)?$totalPrice *.9:null // Ten percent of off-price;
+            'offPrice'=>floatval(number_format($offPrice,2))
         ];
     }
 
