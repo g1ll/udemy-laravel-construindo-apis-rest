@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductCollection extends ResourceCollection
@@ -28,7 +29,7 @@ class ProductCollection extends ResourceCollection
             $totalPrice+=$product->price;
 
         $offPrice = ($totalPrice>100)?$totalPrice *.9:null; // Ten percent of off-price;
-
+        JsonResource::wrap('products'); //change the specific wrap data on json return(default wrap data)
         return [
             'totalPrice'=>$totalPrice,
             'offPrice'=>floatval(number_format($offPrice,2))
