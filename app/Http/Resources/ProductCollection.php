@@ -28,11 +28,11 @@ class ProductCollection extends ResourceCollection
         foreach ($this->collection as $product)
             $totalPrice+=$product->price;
 
-        $offPrice = ($totalPrice>100)?$totalPrice *.9:null; // Ten percent of off-price;
+        $offPrice = ($totalPrice>100)? $totalPrice*.9:null; // Ten percent of off-price;
         JsonResource::wrap('products'); //change the specific wrap data on json return(default wrap data)
         return [
             'totalPrice'=>$totalPrice,
-            'offPrice'=>floatval(number_format($offPrice,2))
+            'offPrice'=>floatval(number_format($offPrice,2,'.',''))
         ];
     }
 

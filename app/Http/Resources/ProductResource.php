@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
              'name'=>$this->name,
              'description'=>$this->description,
              'price'=>$this->price,
-             'offPrice'=>floatval(number_format($offPrice,2)) //Evaluates off-price of 10%
+             'offPrice'=>floatval(number_format($offPrice,2,'.',''))
          ];
 //        return $this->resource->toArray();
     }
