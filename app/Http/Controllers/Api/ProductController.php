@@ -27,12 +27,22 @@ class ProductController extends Controller
         if($request->all()){
 
             $products = $this->product;
+
+            //conditions=name:Test;price=x
+            if($request->has('conditions')){
+                $conditions = explode(';',$request->get('conditions'));
+                foreach ($conditions as $expression) {
+                    $exp = explode(':',$expression);
+                    $products = Product::where($exp[0],$exp[1]);
+
+                }
+            }
+
             if($request->has('fields')){
                 $fields = $request->get('fields');
 //            $products=DB::table('products')->selectRaw($fields)->get();
-                $products=$products->addSelect(explode(',',$fields));
+                $products = $products->addSelect(explode(',',$fields));
             }
-
 
             return response()->json($products->paginate(10));//does not able to use collection
         }
