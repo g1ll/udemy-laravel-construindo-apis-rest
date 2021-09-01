@@ -24,19 +24,20 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = $this->product;
-//        dd($products);
-        if($request->has('fields')){
-            $fields = $request->get('fields');
+        if($request->all()){
+
+            $products = $this->product;
+            if($request->has('fields')){
+                $fields = $request->get('fields');
 //            $products=DB::table('products')->selectRaw($fields)->get();
-            $products=$products->addSelect(explode(',',$fields));
+                $products=$products->addSelect(explode(',',$fields));
+            }
+
+
             return response()->json($products->paginate(10));//does not able to use collection
         }
 
-//        $products = $this->product->all();
-//        $products = $this->product->paginate(10);
-//        return response()->json($products);
-        return new ProductCollection($products->paginate(10));
+        return new ProductCollection($this->product->paginate(10));
     }
 
     public function show($id){
