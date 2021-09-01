@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 //         \App\Models\User::factory(10)->create();
+        //php artisan migrate:refresh --seed
         $this->call(UserTableSeeder::class);
         $this->call(ProductTableSeeder::class);
     }
