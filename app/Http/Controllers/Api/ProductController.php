@@ -7,6 +7,7 @@ use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -21,12 +22,21 @@ class ProductController extends Controller
         $this->product = $product;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $products = $this->product;
+//        dd($products);
+        if($request->has('fields')){
+            $fields = $request->get('fields');
+//            $products=DB::table('products')->selectRaw($fields)->get();
+            $products=$products->addSelect(explode(',',$fields));
+            return response()->json($products->paginate(10));//does not able to use collection
+        }
+
 //        $products = $this->product->all();
-        $products = $this->product->paginate(10);
+//        $products = $this->product->paginate(10);
 //        return response()->json($products);
-        return new ProductCollection($products);
+        return new ProductCollection($products->paginate(10));
     }
 
     public function show($id){
