@@ -25,22 +25,18 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = $this->product;
         if($request->all()){
             $repository = new ProductRepository($this->product);
-
             if($request->has('conditions'))
                 $repository->addConditions($request->get('conditions'));
 
             if($request->has('fields'))
                 $repository->selectFilter($request->get('fields'));
 
-            $products = $repository->getResult();
-
-//            return response()->json($products->paginate(10));//does not able to use collection
+//            return response()->json($products->paginate(10));//does not able to use collection with filter
         }
 
-        return new ProductCollection($products->paginate(10));
+        return new ProductCollection($repository->getResult()->paginate(10));
     }
 
     public function show($id){
