@@ -28,12 +28,11 @@ class ProductController extends Controller
 
             $products = $this->product;
 
-            //conditions=name:Test;price=x
             if($request->has('conditions')){
                 $conditions = explode(';',$request->get('conditions'));
                 foreach ($conditions as $expression) {
                     $exp = explode(':',$expression);
-                    $products = Product::where($exp[0], $exp[1], $exp[2]);
+                    $products = $products->where($exp[0], $exp[1], $exp[2]);
                 }
             }
 
