@@ -33,7 +33,7 @@ class ProductController extends Controller
                 $conditions = explode(';',$request->get('conditions'));
                 foreach ($conditions as $expression) {
                     $exp = explode(':',$expression);
-                    $products = Product::where($exp[0],'like','%'.$exp[1].'%');
+                    $products = Product::where($exp[0], $exp[1], $exp[2]);
                 }
             }
 
