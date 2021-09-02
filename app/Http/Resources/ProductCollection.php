@@ -15,14 +15,14 @@ class ProductCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-//        return parent::toArray($request)
-        $data = [];
-        foreach ($this->collection as $item) {
-//            dump($item);
-                $data[] = $item;//TODO: Remove null atributes
-        }
+////        return parent::toArray($request)
+//        $data = [];
+//        foreach ($this->collection as $item) {
+////            dump($item);
+//                $data[] = $item;//TODO: Remove null atributes
+//        }
         return [
-            'data'=>$data,
+            'data'=>$this->collection ,
             'numProducts'=>sizeof($this->collection)//extra data!
         ];
     }
