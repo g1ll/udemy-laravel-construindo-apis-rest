@@ -23,13 +23,8 @@ class ProductRepository
         $this->request = $request;
     }
 
-    public function selectFilter(){
-        $data = [];
-        if($this->request->has('fields')){
-            $fields = $this->request->get('fields');
-            $data = $this->model->addSelect(explode(',',$fields));
-        }
-        return $data;
+    public function selectFilter($fields){
+        return $this->model->addSelect(explode(',',$fields));
     }
 
     public function addConditions(){
