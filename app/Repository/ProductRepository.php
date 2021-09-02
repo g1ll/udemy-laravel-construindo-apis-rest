@@ -19,12 +19,19 @@ class ProductRepository
 
     public function __construct(Model $model, Request $request)
     {
-
         $this->model = $model;
         $this->request = $request;
     }
 
     public function selectFilter(){
-
+        $data = [];
+        if($this->request->has('conditions')){
+            $conditions = explode(';',$this->request->get('conditions'));
+            foreach ($conditions as $expression) {
+                $exp = explode(':',$expression);
+                $data = $this->model->where($exp[0], $exp[1], $exp[2]);
+            }
+        }
+        return $data;
     }
 }
