@@ -43,11 +43,9 @@ class ProductController extends Controller
 //                $products = $products->addSelect(explode(',',$fields));
 //            }
 
-            $products = (new ProductRepository($products,$request))->selectFilter();
-
-
-
-
+            if($request->has('fields')) {
+                $products = (new ProductRepository($this->product, $request))->selectFilter($request->get('fields'));
+            }
 
             return response()->json($products->paginate(10));//does not able to use collection
         }
