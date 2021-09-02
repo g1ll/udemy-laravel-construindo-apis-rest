@@ -25,6 +25,15 @@ class ProductRepository
 
     public function selectFilter(){
         $data = [];
+        if($this->request->has('fields')){
+            $fields = $this->request->get('fields');
+            $data = $this->model->addSelect(explode(',',$fields));
+        }
+        return $data;
+    }
+
+    public function addConditions(){
+        $data = [];
         if($this->request->has('conditions')){
             $conditions = explode(';',$this->request->get('conditions'));
             foreach ($conditions as $expression) {

@@ -36,13 +36,16 @@ class ProductController extends Controller
 //                    $products = $products->where($exp[0], $exp[1], $exp[2]);
 //                }
 //            }
+
+//            if($request->has('fields')){
+//                $fields = $request->get('fields');
+////            $products=DB::table('products')->selectRaw($fields)->get();
+//                $products = $products->addSelect(explode(',',$fields));
+//            }
+
             $products = (new ProductRepository($products,$request))->selectFilter();
 
-            if($request->has('fields')){
-                $fields = $request->get('fields');
-//            $products=DB::table('products')->selectRaw($fields)->get();
-                $products = $products->addSelect(explode(',',$fields));
-            }
+
 
 
 
