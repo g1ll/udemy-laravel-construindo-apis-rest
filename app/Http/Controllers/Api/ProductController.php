@@ -25,35 +25,22 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+        $products = $this->product;
         if($request->all()){
-
-//            $products = $this->product;
             $repository = new ProductRepository($this->product);
-//            if($request->has('conditions')){
-//                $conditions = explode(';',$request->get('conditions'));
-//                foreach ($conditions as $expression) {
-//                    $exp = explode(':',$expression);
-//                    $products = $products->where($exp[0], $exp[1], $exp[2]);
-//                }
-//            }
 
-//            if($request->has('fields')){
-//                $fields = $request->get('fields');
-////            $products=DB::table('products')->selectRaw($fields)->get();
-//                $products = $products->addSelect(explode(',',$fields));
-//            }
+            if($request->has('conditions'))
+                $repository->addConditions($request->get('conditions'));
 
-            if($request->has('conditions')){
-                $this->product = $repository->addConditions($request->get('conditions'));
-            }
+            if($request->has('fields'))
+                $repository->selectFilter($request->get('fields'));
 
-            if($request->has('fields')) {
-                $this->product = $repository->selectFilter($request->get('fields'));
-            }
-            return response()->json($this->product->paginate(10));//does not able to use collection
+            $products = $repository->getResult();
+
+//            return response()->json($products->paginate(10));//does not able to use collection
         }
 
-        return new ProductCollection($this->product->paginate(10));
+        return new ProductCollection($products->paginate(10));
     }
 
     public function show($id){
