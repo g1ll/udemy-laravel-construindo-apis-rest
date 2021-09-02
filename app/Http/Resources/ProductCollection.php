@@ -16,8 +16,13 @@ class ProductCollection extends ResourceCollection
     public function toArray($request)
     {
 //        return parent::toArray($request)
+        $data = [];
+        foreach ($this->collection as $item) {
+//            dump($item);
+                $data[] = $item;//TODO: Remove null atributes
+        }
         return [
-            'data'=>$this->collection,
+            'data'=>$data,
             'numProducts'=>sizeof($this->collection)//extra data!
         ];
     }
