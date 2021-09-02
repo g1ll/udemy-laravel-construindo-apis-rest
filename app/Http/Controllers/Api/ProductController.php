@@ -27,8 +27,8 @@ class ProductController extends Controller
     {
         if($request->all()){
 
-            $products = $this->product;
-
+//            $products = $this->product;
+            $repository = new ProductRepository($this->product);
 //            if($request->has('conditions')){
 //                $conditions = explode(';',$request->get('conditions'));
 //                foreach ($conditions as $expression) {
@@ -43,11 +43,14 @@ class ProductController extends Controller
 //                $products = $products->addSelect(explode(',',$fields));
 //            }
 
-            if($request->has('fields')) {
-                $products = (new ProductRepository($this->product, $request))->selectFilter($request->get('fields'));
+            if($request->has('conditions')){
+                $this->product = $repository->addConditions($request->get('conditions'));
             }
 
-            return response()->json($products->paginate(10));//does not able to use collection
+            if($request->has('fields')) {
+                $this->product = $repository->selectFilter($request->get('fields'));
+            }
+            return response()->json($this->product->paginate(10));//does not able to use collection
         }
 
         return new ProductCollection($this->product->paginate(10));
