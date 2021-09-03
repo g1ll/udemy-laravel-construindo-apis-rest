@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Repository\ProductRepository;
@@ -45,7 +46,7 @@ class ProductController extends Controller
     }
 
 
-    public function save(Request $request){
+    public function save(ProductRequest $request){
         $data = $request->all();
         $product = $this->product->create($data);
 
